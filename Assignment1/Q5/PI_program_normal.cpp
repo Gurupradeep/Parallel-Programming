@@ -24,7 +24,7 @@
 
 namespace {
 
-double pi_parallel_critical(int no_of_threads, int no_of_steps, int flag) {
+double pi_parallel(int no_of_threads, int no_of_steps, int flag) {
 
 	
 	//Setting number of threads based on the passed parameter
@@ -98,16 +98,16 @@ int main(int argc, char* argv[]) {
 	double time_taken_critical;
 	double time_taken_atomic;	
 	if(argc == 1) {
-		time_taken_critical = pi_parallel_critical(0,0,0);
-		time_taken_atomic = pi_parallel_critical(0,0,1);
+		time_taken_critical = pi_parallel(0,0,0);
+		time_taken_atomic = pi_parallel(0,0,1);
 	}
 	else if(argc == 2) {
-		time_taken_critical = pi_parallel_critical(atoi(argv[1]),0,0);
-		time_taken_atomic = pi_parallel_critical(atoi(argv[1]),0,1);
+		time_taken_critical = pi_parallel(atoi(argv[1]),0,0);
+		time_taken_atomic = pi_parallel(atoi(argv[1]),0,1);
 	}
 	else if(argc == 3) {
-		time_taken_critical = pi_parallel_critical(atoi(argv[1]),atoi(argv[2]),0);
-		time_taken_atomic = pi_parallel_critical(atoi(argv[1]),atoi(argv[2]),1);
+		time_taken_critical = pi_parallel(atoi(argv[1]),atoi(argv[2]),0);
+		time_taken_atomic = pi_parallel(atoi(argv[1]),atoi(argv[2]),1);
 
 	}
 	else {
