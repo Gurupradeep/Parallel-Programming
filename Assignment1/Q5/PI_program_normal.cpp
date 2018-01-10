@@ -49,19 +49,19 @@ double pi_parallel(int no_of_threads, int no_of_steps, int flag) {
 
 	// Starting timer
 	double begin = omp_get_wtime();
-
+	double sum = 0.0, x;
+	int i;
 	//Parallel step
-	#pragma omp parallel
+	#pragma omp parallel shared(pi,flag) private(x,sum,i)
 	{
-		double sum = 0.0, x;
+		
 		int id;
 		id = omp_get_thread_num();
 		int n_threads;
 		n_threads = omp_get_num_threads();
-		int i;
 
-		//Parallel task part
-		for(i=id;i<step_count;i = i + n_threads) {
+		#pragma omp for
+		for(i = 0; i< step_count; i++) {
 			x = (i + 0.5)*step;
 			sum = sum + 4.0/(1.0 + x*x);	
 		}
@@ -83,13 +83,35 @@ double pi_parallel(int no_of_threads, int no_of_steps, int flag) {
 
 	}
 
-	printf("PI value is %lf, Calculated using %d number of threads and %d number of steps\n",pi,no_of_threads,step_count);
+	if(flag == 0)
+		printf("PI value is %lf, Calculated using %d number of threads and %d number of steps\n",pi,no_of_threads,step_count);
 	// Stopping timer
 	double end = omp_get_wtime();
 
 	return end - begin;
 }
 
+double pi_serial( int no_of_steps) {
+	
+	int step_count;
+	if(no_of_steps > 0)
+		step_count = no_of_steps;
+	else
+		step_count = NO_OF_STEPS;
+
+	double x, pi, sum = 0.0;
+	double step = 1.0 / (double) step_count;
+	double begin = omp_get_wtime();
+	for(int i = 0; i < step_count; i++) {
+		x = (i + 0.5) * step;
+		sum = sum + 4.0 / (1 + x * x);
+
+	}
+	pi = step * sum;
+
+	double end = omp_get_wtime();
+	return end - begin;	
+}
 
 }
 
@@ -97,17 +119,21 @@ int main(int argc, char* argv[]) {
 
 	double time_taken_critical;
 	double time_taken_atomic;	
+	double time_serial;
 	if(argc == 1) {
 		time_taken_critical = pi_parallel(0,0,0);
 		time_taken_atomic = pi_parallel(0,0,1);
+		time_serial = pi_serial(0);
 	}
 	else if(argc == 2) {
 		time_taken_critical = pi_parallel(atoi(argv[1]),0,0);
 		time_taken_atomic = pi_parallel(atoi(argv[1]),0,1);
+		time_serial = pi_serial(0);
 	}
 	else if(argc == 3) {
 		time_taken_critical = pi_parallel(atoi(argv[1]),atoi(argv[2]),0);
 		time_taken_atomic = pi_parallel(atoi(argv[1]),atoi(argv[2]),1);
+		time_serial = pi_serial(atoi(argv[2]));
 
 	}
 	else {
@@ -117,5 +143,6 @@ int main(int argc, char* argv[]) {
 
 	printf("Time taken for parallel version is using critical construct is : %lf Seconds\n", time_taken_critical);
 	printf("Time taken for parallel version is using atomic construct is : %lf Seconds\n", time_taken_atomic);
+	printf("Time taken for Serial execution is : %lf Seconds\n", time_serial);
 	
 }
