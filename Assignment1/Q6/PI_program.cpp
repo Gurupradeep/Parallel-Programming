@@ -67,6 +67,27 @@ double pi_worksharing_and_reduction_parallel(int no_of_threads, int no_of_steps)
 
 	return end - begin;
 }
+double pi_serial( int no_of_steps) {
+	
+	int step_count;
+	if(no_of_steps > 0)
+		step_count = no_of_steps;
+	else
+		step_count = NO_OF_STEPS;
+
+	double x, pi, sum = 0.0;
+	double step = 1.0 / (double) step_count;
+	double begin = omp_get_wtime();
+	for(int i = 0; i < step_count; i++) {
+		x = (i + 0.5) * step;
+		sum = sum + 4.0 / (1 + x * x);
+
+	}
+	pi = step * sum;
+
+	double end = omp_get_wtime();
+	return end - begin;	
+}
 
 }
 
@@ -76,18 +97,23 @@ int main(int argc, char* argv[]) {
 	double time_taken_serial;	
 	if(argc == 1) {
 		time_taken_parallel = pi_worksharing_and_reduction_parallel(0,0);
+		time_taken_serial = pi_serial(0);
 	}
 	else if(argc == 2) {
 		time_taken_parallel = pi_worksharing_and_reduction_parallel(atoi(argv[1]),0);
+		time_taken_serial = pi_serial(0);
 	}
+	
 	else if(argc == 3) {
 		time_taken_parallel = pi_worksharing_and_reduction_parallel(atoi(argv[1]),atoi(argv[2]));
-
+		time_taken_serial = pi_serial(atoi(argv[2]));
 	}
+
 	else {
 		printf("ERROR: Provide Correct Number of arguments\n");
 		exit(0);
 	}
 
 	printf("Time taken for parallel version is : %lf\n", time_taken_parallel);
+	printf("Time taken for Serial version is : %lf\n", time_taken_serial);
 }
