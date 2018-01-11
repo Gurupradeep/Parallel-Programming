@@ -1,3 +1,8 @@
+/*
+ * Producer Consumer problem.
+ * Compilation: producer_consumer.cc -fopenmp
+ * Execution: ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp.h>
