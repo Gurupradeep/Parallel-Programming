@@ -1,3 +1,11 @@
+/*
+ * DAXPI program.
+ * Run the program as follows.
+ * Compilation:
+ * g++ daxpy.cc -fopenmp
+ * Run:
+ * ./a.out
+ */
 #include <stdio.h>
 #include <omp.h>
 #include <iostream>

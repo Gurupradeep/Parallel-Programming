@@ -1,3 +1,11 @@
+/*
+ * Matrix Multiplication
+ * Run the program as follows:
+ * Compilation:
+ * g++ matrix_multiplication.cc -fopenmp
+ * Execution:
+ * ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
