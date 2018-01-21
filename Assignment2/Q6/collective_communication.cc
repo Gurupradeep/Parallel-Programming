@@ -1,3 +1,13 @@
+/*
+ * Collective Communication - Scatter - Gather
+ * Run the program as follows
+ * (Compilation) collective_communication.cc 
+ * (Execution) mpirun -n NO_OF_PROCESSES ./a.out NO_OF_ELEMENTS_PER_PROCESS
+ * Arguments
+ * 1) NO_OF_PROCESES. (Optional Parameter) : no of processes to be created.
+ * 2) NO_OF_ELEMENTS_PER_PROCESS (Compulsary parameter) : No of elements that should
+ 	be allocated to each process.
+ */
 #include <stdio.h>
 #include <mpi.h>
 #include <stdlib.h>

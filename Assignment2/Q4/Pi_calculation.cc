@@ -1,7 +1,7 @@
 /*
  * Basic Hello world program
  * Run the program as follows
- * (Compilation) Pi_calulation.cc
+ * (Compilation) mpicxx Pi_calulation.cc
  * (Execution) mpirun -n NO_OF_PROCESSES ./a.out
  * Arguments
  * 1) NO_OF_PROCESES. (Optional Parameter) : no of processes to be created.
