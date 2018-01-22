@@ -40,7 +40,8 @@ int main () {
         half = half / 2;
     }
     if (world_rank == 0) {
-        printf("Numer of processors: %d.\nTotal sum value: %d.\nValue ((proc)*(proc + 1)/2): %d.\n", world_size, value, 10);    
+        printf("Numer of processors: %d.\nTotal sum value: %d.\nValue ((proc)*(proc + 1)/2): %d.\n",
+             world_size, value, ((world_size)*(world_size + 1)/2));  
     }
     MPI_Finalize();
     return 0;
