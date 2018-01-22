@@ -20,8 +20,10 @@ int main () {
         MPI_Pack(&c, 1, MPI_CHAR, interm_buffer, 100, &position, MPI_COMM_WORLD);
         MPI_Pack(i, 2, MPI_INT, interm_buffer, 100, &position, MPI_COMM_WORLD);
         MPI_Pack(f, 4, MPI_FLOAT, interm_buffer, 100, &position, MPI_COMM_WORLD);
-        MPI_Send(interm_buffer, position, MPI_PACKED, 1, 100, MPI_COMM_WORLD);
-    } else if (world_rank == 1) {
+        for(int i=1; i < world_size; i++) {
+             MPI_Send(interm_buffer, position, MPI_PACKED, i, 100, MPI_COMM_WORLD);
+        }
+    } else if (world_rank != 0) {
         MPI_Recv(interm_buffer, 100, MPI_PACKED, 0, 100, MPI_COMM_WORLD, &status);
         MPI_Unpack(interm_buffer, 100, &position, &c, 1, MPI_CHAR, MPI_COMM_WORLD);
         MPI_Unpack(interm_buffer, 100, &position, i, 2, MPI_INT, MPI_COMM_WORLD);
