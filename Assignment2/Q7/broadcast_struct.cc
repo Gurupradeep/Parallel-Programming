@@ -18,6 +18,8 @@ int main () {
     int block_length[] = {1, 2, 4};
     MPI_Aint displacements[3];
     MPI_Init(NULL, NULL);
+
+    //Getting the byte displacement of each block
     MPI_Aint block_address, block_address1, block_address2;
     MPI_Get_address(&struct_data.c, &block_address);
     displacements[0] = block_address - block_address;
@@ -25,7 +27,10 @@ int main () {
     displacements[1] = block_address1 - block_address;
     MPI_Get_address(&struct_data.f, &block_address2);
     displacements[2] = block_address2 - block_address;
+
+    // Creates a struct and returns the handle to the derived type in dd_type
     MPI_Type_create_struct(3, block_length, displacements, types, &dd_type);
+    //Commits the new type
     MPI_Type_commit(&dd_type);
     int world_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);

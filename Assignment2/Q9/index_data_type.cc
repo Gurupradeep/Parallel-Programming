@@ -18,8 +18,10 @@ int main () {
         block_lengths[i] = N - i;
         displacement[i] = i * N + i; // 1 D array.
     }
-
+    // Creates a new derived datatype and returns the handle to the derived datatye in
+    // matrix_indexed_datatype
     MPI_Type_indexed(N, block_lengths, displacement, MPI_INT, &matrix_indexed_datatype);
+    //Commiting the new data type
     MPI_Type_commit(&matrix_indexed_datatype);
 
     if (world_rank == 0) {
