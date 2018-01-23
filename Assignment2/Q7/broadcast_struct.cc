@@ -1,3 +1,10 @@
+/*
+ * Building a custom datatype (struct in this case) in MPI Program 
+ * and communicate via broadcast.
+ *
+ * compile: mpicxx broadcast_struct.cc
+ * run: mpirun -n 4 ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>

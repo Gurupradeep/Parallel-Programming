@@ -1,3 +1,10 @@
+/*
+ * Sum reduction operation using value sharing between processors. 
+ * Communication to be done using non blocking send and recv.
+ *
+ * compile: mpicxx blocking_sum.cc
+ * run: mpirun -n 2 ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>

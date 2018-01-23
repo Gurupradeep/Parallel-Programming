@@ -1,3 +1,10 @@
+/*
+ * Program to perform a DAXPY operation on an array of 2^16 size.
+ * Compile the program: mpicxx daxpy.cc
+ * Run the program: mpirun -n {#NumProc} ./a.out
+ * Argument: NumProc, number of processes to run concurrently.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

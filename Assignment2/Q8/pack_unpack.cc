@@ -1,3 +1,9 @@
+/*
+ * Communicate compound datastructures using pack and unpack.
+ *
+ * compile: mpicxx pack_unpack.cc
+ * run: mpirun -n 2 ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>

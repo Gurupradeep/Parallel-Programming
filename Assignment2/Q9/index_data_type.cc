@@ -1,3 +1,11 @@
+/*
+ * Indexed derived datatype to store the upper triange of a 2 dimensional
+ * matrix and send it to another process.
+ *
+ * compile: mpicxx index_data_type.cc
+ * run: mpirun -n NUMPROC ./a.out
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>

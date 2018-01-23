@@ -1,3 +1,10 @@
+/*
+ * Building a custom datatype (struct in this case) in a mpi program 
+ * and sending it via point to point communication.
+ *
+ * compile: mpicxx point_to_point_struct.cc
+ * run: mpirun -n 4 ./a.out
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
